@@ -120,9 +120,9 @@ docker-compose up --build -d
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-<!-- AUTHORS -->
+<!-- AUTHOR -->
 
-## 👥 Authors <a name="authors"></a>
+## 👥 Author <a name="authors"></a>
 
 👤 **Kolapo Akinrinlola**
 
