@@ -7,7 +7,7 @@ from app.routes import router
 # Create tables
 app.models.Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Trade Order API")
+app = FastAPI(title="Blockhouse API")
 
 # CORS middleware
 app.add_middleware(
