@@ -11,7 +11,7 @@ class OrderCreate(OrderBase):
     pass
 
 class Order(OrderBase):
-    id: int
+    id: str
     status: str
     created_at: datetime
 

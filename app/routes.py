@@ -48,19 +48,19 @@ def get_orders(
     return query.offset(skip).limit(limit).all()
 
 @router.get("/orders/{order_id}", response_model=Order)
-def get_order(order_id: int, db: Session = Depends(get_db)):
+def get_order(order_id: str, db: Session = Depends(get_db)):
     db_order = db.query(OrderModel).filter(OrderModel.id == order_id).first()
     if db_order is None:
         raise HTTPException(status_code=404, detail="Order not found")
     return db_order
 
 @router.put("/orders/{order_id}/status", response_model=Order)
-async def update_order_status(order_id: int, status: str, db: Session = Depends(get_db)):
+async def update_order_status(order_id: str, status: str, db: Session = Depends(get_db)):
     db_order = db.query(OrderModel).filter(OrderModel.id == order_id).first()
     if db_order is None:
         raise HTTPException(status_code=404, detail="Order not found")
 
-    if status not in ["pending", "filled", "canceled"]:
+    if status not in ["pending", "fulfilled", "canceled"]:
         raise HTTPException(status_code=400, detail="Invalid status")
 
     setattr(db_order, "status", status)
