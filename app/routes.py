@@ -11,6 +11,15 @@ router = APIRouter()
 
 @router.post("/orders", response_model=Order, status_code=201)
 async def create_order(order: OrderCreate, db: Session = Depends(get_db)):
+    # Check if the symbol already exists in the orders table
+    existing_order = db.query(OrderModel).filter_by(symbol=order.symbol).first()
+    if existing_order:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Order for symbol '{order.symbol}' already exists. Duplicate orders are not allowed."
+        )
+
+    # Create the order if the symbol does not exist
     db_order = OrderModel(
         symbol=order.symbol,
         price=order.price,
